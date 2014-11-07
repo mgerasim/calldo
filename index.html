@@ -1,7 +1,36 @@
-<html>
+<!doctype html>
+<html lang="ru-RU" manifest="default.appcache">
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="css/jquery.mobile.inline-png-1.4.3.min.css" type="text/css" media="screen"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile-1.4.3.js"></script>
+    <script src="js/jquery.notice.js"></script>
+    <script src="js/core.js"></script>
 </head>
 <body>
-test
+	<div data-role="page">
+    	<div data-role="content">
+			
+        <div id="phoneA" data-role="fieldcontain">
+	    <label for="name">Телефон А:</label>
+    	    <input type="tel" name="phoneA" value=""  />
+	</div>
+        		
+        <div id="phoneB" data-role="fieldcontain">
+	    <label for="name">Телефон В:</label>
+    	    <input type="tel" name="phoneB" value=""  />
+	</div>    
+
+            
+            <a id="save" class="ui-shadow ui-btn-inline" href="#" data-role="button" data-theme="a" data-icon="check">
+            	Отправить
+            </a> 
+			
+        </div> <!-- <div data-role="content"> -->
+    </div> <!-- <div data-role="page"> -->
 </body>
 </html>
+	
+  
