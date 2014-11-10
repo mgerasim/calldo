@@ -1,16 +1,38 @@
 <?php
 
-$e_mail = 'mgerasim.mail@gmail.com'; // Здесь необходимо прописать адрес, куда будет отправлено письмо (можно несколько через запятую)
-$send_mail_subject = "";
-$send_mail_text = $_REQUEST["phonea"]." ".$_REQUEST["phoneb"];
+require("/usr/share/php/PHPMailer/class.smtp.php");
+require("/usr/share/php/PHPMailer/class.phpmailer.php");
 
-echo $send_mail_text;
+$mail = new PHPMailer;
+//будем отравлять письмо через СМТП сервер
+$mail->isSMTP();
+//хост
+$mail->Host = getenv('MGERASIM_INBOX_HOST');
+//требует ли СМТП сервер авторизацию/идентификацию
+$mail->SMTPAuth = true;
+// логин от вашей почты
+$mail->Username = getenv('MGERASIM_INBOX_USER');
+// пароль от почтового ящика
+$mail->Password = getenv('MGERASIM_INBOX_PASS');
+//указываем способ шифромания сервера
+$mail->SMTPSecure = 'ssl';
+//указываем порт СМТП сервера
+$mail->Port = getenv('MGERASIM_INBOX_PORT');
 
-$headers = "From: munged@gmail.com";
-$headers .= "\r\nReply-To: munged@gmail.com";
-$headers .= "\r\nX-Mailer: PHP/".phpversion();
+//указываем кодировку для письма
+$mail->CharSet = 'UTF-8';
+//информация от кого отправлено письмо
+$mail->From = getenv('MGERASIM_INBOX_EMAIL');
+$mail->FromName = 'Админ';
+$mail->addAddress(getenv('MGERASIM_INBOX_DEST'));
 
-mail($e_mail, $send_mail_subject, $send_mail_text, $headers, "-f mgerasim@inbox.ru");
+$mail->Subject = 'Callback from Form';
+$mail->Body = $_REQUEST["phonea"]." ".$_REQUEST["phoneb"];
 
-
-?>
+if( $mail->send() ){
+   echo 'Письмо отправлено';
+   }else{
+      echo 'Письмо не может быть отправлено. ';
+         echo 'Ошибка: ' . $mail->ErrorInfo;
+         }
+         ?>

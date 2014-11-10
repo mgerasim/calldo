@@ -18,14 +18,12 @@ var handleSave = function handleSave() {
 
 
 function saveOrder(){
-	console.log( 'SaveOrder' );
 	$.ajax({
 	        type:'POST',
-	        url:'/send.php',
+	        url:'/calldo/send.php',
 	        data:{ 'phonea':$("#phoneA input").val(),  'phoneb':$("#phoneB input").val()  },
 	        response:'text',
 	        success:function (data) {
-		    console.log( data );
 	        }
 	    });
     
